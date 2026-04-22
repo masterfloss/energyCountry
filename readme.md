@@ -1,69 +1,195 @@
-# Energy use per person - Data package
+# Energy Data Documentation (Our World in Data)
 
-This data package contains the data that powers the chart ["Energy use per person"](https://ourworldindata.org/grapher/per-capita-energy-use?v=1&csvType=full&useColumnShortNames=false) on the Our World in Data website. It was downloaded on April 22, 2026.
+## 1. Introduction
 
-### Active Filters
+This document provides a structured overview of two datasets from Our World in Data (OWID):
 
-A filtered subset of the full data was downloaded. The following filters were applied:
+- **Energy Consumption by Source**
+- **Energy Use per Person**
 
-## CSV Structure
+These datasets offer complementary perspectives on global energy use. The first captures total energy consumption disaggregated by energy source, while the second normalizes consumption on a per capita basis, enabling cross-country comparisons.
 
-The high level structure of the CSV file is that each row is an observation for an entity (usually a country or region) and a timepoint (usually a year).
+---
 
-The first two columns in the CSV file are "Entity" and "Code". "Entity" is the name of the entity (e.g. "United States"). "Code" is the OWID internal entity code that we use if the entity is a country or region. For most countries, this is the same as the [iso alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) code of the entity (e.g. "USA") - for non-standard countries like historical countries these are custom codes.
+## 2. Data Structure
 
-The third column is either "Year" or "Day". If the data is annual, this is "Year" and contains only the year as an integer. If the column is "Day", the column contains a date string in the form "YYYY-MM-DD".
+Both datasets share a common tabular structure.
 
-The final column is the data column, which is the time series that powers the chart. If the CSV data is downloaded using the "full data" option, then the column corresponds to the time series below. If the CSV data is downloaded using the "only selected data visible in the chart" option then the data column is transformed depending on the chart type and thus the association with the time series might not be as straightforward.
+### 2.1 Core Variables
 
+- **Entity**: Name of the country or region  
+- **Code**: OWID identifier (generally aligned with ISO alpha-3 codes)  
+- **Year / Day**:  
+  - *Year*: integer (annual observations)  
+  - *Day*: date string (YYYY-MM-DD), if applicable  
 
-## Metadata.json structure
+### 2.2 Data Columns
 
-The .metadata.json file contains metadata about the data package. The "charts" key contains information to recreate the chart, like the title, subtitle etc.. The "columns" key contains information about each of the columns in the csv, like the unit, timespan covered, citation for the data etc..
+- **Energy consumption by source**: multiple columns, each representing a distinct energy source  
+- **Energy use per person**: a single column representing per capita energy consumption  
 
-## About the data
+---
 
-Our World in Data is almost never the original producer of the data - almost all of the data we use has been compiled by others. If you want to re-use data, it is your responsibility to ensure that you adhere to the sources' license and to credit them correctly. Please note that a single time series may have more than one source - e.g. when we stich together data from different time periods by different producers or when we calculate per capita metrics using population data from a second source.
+## 3. Metadata
 
-## Detailed information about the data
+Each dataset includes a `.metadata.json` file containing:
 
+- Chart-level information (e.g., title, subtitle)
+- Column-level metadata:
+  - Units of measurement  
+  - Temporal coverage  
+  - Source attribution and citations  
 
-## Primary energy consumption per capita
-Measured in kilowatt-hours per person.
-Last updated: June 27, 2025  
-Next update: June 2026  
-Date range: 1965–2024  
-Unit: kilowatt-hours per person  
+This structure supports reproducibility and transparency.
 
+---
 
-### How to cite this data
+## 4. Data Sources and Processing
 
-#### In-line citation
-If you have limited space (e.g. in data visualizations), you can use this abbreviated in-line citation:  
-U.S. Energy Information Administration (2025); Energy Institute - Statistical Review of World Energy (2025); Population based on various sources (2024) – with major processing by Our World in Data
+### 4.1 Source Attribution
 
-#### Full citation
-U.S. Energy Information Administration (2025); Energy Institute - Statistical Review of World Energy (2025); Population based on various sources (2024) – with major processing by Our World in Data. “Primary energy consumption per capita” [dataset]. U.S. Energy Information Administration, “International Energy Data”; Energy Institute, “Statistical Review of World Energy”; Various sources, “Population” [original data].
-Source: U.S. Energy Information Administration (2025), Energy Institute - Statistical Review of World Energy (2025), Population based on various sources (2024) – with major processing by Our World In Data
+The datasets are compiled from multiple external sources, including:
 
-### Sources
+- Energy Institute – *Statistical Review of World Energy*  
+- U.S. Energy Information Administration (EIA)  
+- Population data from various sources  
 
-#### U.S. Energy Information Administration – International Energy Data
-Retrieved on: 2025-07-08  
-Retrieved from: https://www.eia.gov/opendata/bulkfiles.php  
+### 4.2 Data Processing
 
-#### Energy Institute – Statistical Review of World Energy
-Retrieved on: 2025-06-27  
-Retrieved from: https://www.energyinst.org/statistical-review/  
+Data preparation involves:
 
-#### Various sources – Population
-Retrieved on: 2026-03-31  
-Retrieved from: https://ourworldindata.org/population-sources  
+- Standardization of country names and regional classifications  
+- Unit conversion  
+- Construction of derived indicators (e.g., per capita values)  
+- Harmonization of metadata  
 
-#### Notes on our processing step for this indicator
-- Primary energy consumption data was compiled based on two key data sources: [Energy Institute (EI) Statistical Review of World Energy](https://www.energyinst.org/statistical-review), and [International energy data from the U.S. Energy Information Administration (EIA)](https://www.eia.gov/international/data/world/total-energy/more-total-energy-data). EI provides the longest and most up-to-date time-series of primary energy. However, it does not provide data for all countries. We have therefore supplemented this dataset with energy data from the EIA. Where EI provides data for a given country, this data is adopted; for countries where this data is missing, we rely on EIA energy figures.
-- Per capita figures have been calculated using a population dataset that is based on [different sources](https://ourworldindata.org/population-sources).
-- To calculate energy per unit of GDP, we divide by total real GDP figures from [the Maddison Project Database](https://ourworldindata.org/grapher/gdp-maddison-project-database).
+Users are responsible for complying with the licensing conditions of the original data providers.
+
+---
+
+## 5. Energy Consumption by Source
+
+### 5.1 Overview
+
+- **Unit**: Terawatt-hours (TWh)  
+- **Time range**: 1965–2024  
+- **Last updated**: June 27, 2025  
+
+### 5.2 Energy Categories
+
+#### Renewable and Low-Carbon Sources
+
+- Solar  
+- Wind  
+- Hydropower  
+- Nuclear  
+- Biofuels  
+- Other renewables (including geothermal and biomass)  
+
+#### Fossil Fuels
+
+- Oil  
+- Gas  
+- Coal  
+
+---
+
+### 5.3 Methodology
+
+#### 5.3.1 Input-Equivalent Energy
+
+Electricity-based energy sources are expressed using the **substitution method**, which estimates the equivalent amount of primary energy required in fossil fuel power plants.
+
+- Approximate conversion efficiency: **41%** (solar, wind, hydro, nuclear)  
+- Biomass-specific efficiency: **32%**  
+
+#### 5.3.2 Methodological Change
+
+In 2025, the underlying source adopted the **Physical Energy Content method**. OWID continues to apply the substitution method to ensure consistency across time series.
+
+---
+
+### 5.4 Fossil Fuel Measurement Notes
+
+- **Gas**: Includes gas used in transformation processes; excludes gas converted into liquid fuels  
+- **Coal**: Includes commercial solid fuels; excludes conversion into liquid or gaseous fuels  
+- **Oil**: Includes aviation and marine bunkers; excludes biofuels  
+
+---
+
+### 5.5 Source
+
+Energy Institute (2025). *Statistical Review of World Energy*.  
+https://www.energyinst.org/statistical-review/
+
+---
+
+## 6. Energy Use per Person
+
+### 6.1 Overview
+
+- **Indicator**: Primary energy consumption per capita  
+- **Unit**: Kilowatt-hours per person  
+- **Time range**: 1965–2024  
+- **Last updated**: June 27, 2025  
+
+---
+
+## 6.2 Methodology
+
+This dataset combines:
+
+- Energy consumption data from:
+  - Energy Institute (EI)  
+  - U.S. Energy Information Administration (EIA)  
+- Population data from multiple sources  
+
+### Data Integration Strategy
+
+- EI data is used where available  
+- EIA data is used to fill gaps  
+
+### Calculation
+
+Energy consumption per capita is defined as:
+
+Energy per capita = Total energy consumption / Population
+
+---
+
+## 6.3 Sources
+
+- U.S. Energy Information Administration (2025). *International Energy Data*  
+- Energy Institute (2025). *Statistical Review of World Energy*  
+- Various sources (2024). Population data compiled by Our World in Data  
+
+---
+
+## 7. Comparison of Datasets
+
+| Dimension | Energy Consumption by Source | Energy Use per Person |
+|----------|-----------------------------|----------------------|
+| Analytical focus | Total energy consumption | Per capita consumption |
+| Structure | Multiple variables | Single variable |
+| Unit | Terawatt-hours (TWh) | kWh per person |
+| Derived metric | No | Yes |
+| Data sources | Energy Institute | EI, EIA, population data |
+
+---
+
+## 8. Concluding Remarks
+
+The two datasets provide complementary analytical value. The energy-by-source dataset enables examination of energy composition and transitions, while the per capita dataset supports comparative analysis of energy use across populations.
+
+When using these datasets jointly, attention should be paid to differences in methodology, source integration, and unit definitions to ensure consistent interpretation.
+
+---
+
+## 9. References
+
+- Energy Institute (2025). *Statistical Review of World Energy*  
+- U.S. Energy Information Administration (2025). *International Energy Data*  
+- Our World in Data. Population datasets and documentation  
 
 
 
